@@ -18,6 +18,8 @@ public class Account {
 
     private Long id;
 
+    private String iban;
+
     @Enumerated(EnumType.STRING)
     private AccountStatus status = AccountStatus.OPEN;
 
