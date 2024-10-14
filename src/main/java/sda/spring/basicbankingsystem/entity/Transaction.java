@@ -21,9 +21,13 @@ public class Transaction {
     @JoinColumn(name = "sender_account_id")
     private Account senderAccount;
 
+    private String senderAccountIBAN;
+
     @ManyToOne
     @JoinColumn(name = "recipient_account_id")
     private Account recipientAccount;
+
+    private String recipientAccountIBAN;
 
     private BigDecimal amount;
 
