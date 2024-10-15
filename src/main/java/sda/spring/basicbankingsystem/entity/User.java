@@ -7,11 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-
+@Accessors(chain = true)
 public class User {
 
     @Id
@@ -28,4 +31,6 @@ public class User {
     private String lastName;
 
     private String email;
+
+    private LocalDateTime createdAt;
 }

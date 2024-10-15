@@ -6,6 +6,7 @@ import lombok.Setter;
 import sda.spring.basicbankingsystem.enums.AccountStatus;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -39,4 +40,6 @@ public class Account {
 
     @OneToMany(mappedBy = "recipientAccount")
     private List<Transaction> incomingTransactions;
+
+    private LocalDateTime createdAt;
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 import sda.spring.basicbankingsystem.enums.TransactionsStatus;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -33,5 +34,7 @@ public class Transaction {
 
     @Enumerated(EnumType.STRING)
     private TransactionsStatus status;
+
+    private LocalDateTime createdAt;
 
 }

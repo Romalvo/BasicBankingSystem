@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,4 +25,6 @@ public class Branch {
 
     @OneToMany(mappedBy = "branch")
     private List<Account> accounts;
+
+    private LocalDateTime createdAt;
 }
