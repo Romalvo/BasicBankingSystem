@@ -2,8 +2,6 @@ package sda.spring.basicbankingsystem.service;
 
 
 import org.iban4j.CountryCode;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,7 @@ import sda.spring.basicbankingsystem.dto.response.OpenAccountResponseDto;
 import sda.spring.basicbankingsystem.entity.Account;
 import sda.spring.basicbankingsystem.entity.Branch;
 import sda.spring.basicbankingsystem.entity.User;
+import sda.spring.basicbankingsystem.enums.AccountStatus;
 import sda.spring.basicbankingsystem.mapper.AccountMapper;
 import sda.spring.basicbankingsystem.mapper.UserMapper;
 import sda.spring.basicbankingsystem.repository.AccountRepository;
@@ -19,11 +18,13 @@ import sda.spring.basicbankingsystem.repository.BranchRepository;
 import sda.spring.basicbankingsystem.repository.UserRepository;
 import sda.spring.basicbankingsystem.util.IbanGenerator;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Service
 public class AccountService {
 
     private final AccountRepository accountRepository;
-
     private final AccountMapper accountMapper;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -46,7 +47,9 @@ public class AccountService {
 
     public OpenAccountResponseDto openAccount(OpenAccountDto openAccountDto) {
 
-        Account account = accountMapper.fromOpenAccountRequestToEntity(openAccountDto);
+        Account account = new Account()
+                .setBalance(BigDecimal.ZERO)
+                .setStatus(AccountStatus.OPEN);
 
         //1-set logged in user as account user
 
@@ -59,16 +62,21 @@ public class AccountService {
             account.setOwner(user);
         }
 
+        // 2 - Find the branch by the branchId provided in the request
+
         Branch branch = branchRepository.findById(openAccountDto.getBranchId()).orElseThrow(
                 RuntimeException::new
         );
-        // 2 - Generate IBAN
 
-        account.setIban(ibanGenerator.generate(
-                CountryCode.valueOf(branch.getCountry()),
-                "243254354234"
-        ).toFormattedString());
+        // 3 - Set branch entity | object to the account object
+        account.setBranch(branch);
 
+        // 4 - Generate IBAN
+        String generatedIBAN = ibanGenerator.generateIban(CountryCode.valueOf(branch.getCountry()).toString());
+        account.setIban(generatedIBAN);
+
+        // 5 - Set createdAt to now
+        account.setCreatedAt(LocalDateTime.now());
         account = accountRepository.save(account);
 
         return accountMapper.fromEntityToOpenAccountResponseDto(account);
