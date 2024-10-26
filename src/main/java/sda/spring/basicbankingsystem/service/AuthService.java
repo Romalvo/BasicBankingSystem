@@ -4,8 +4,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import sda.spring.basicbankingsystem.dto.request.RegisterUserRequestDto;
-import sda.spring.basicbankingsystem.dto.response.UserProfileDto;
 import sda.spring.basicbankingsystem.entity.User;
 import sda.spring.basicbankingsystem.repository.UserRepository;
 
@@ -16,8 +14,11 @@ public class AuthService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+
+
     public AuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
+
     }
 
     @Override
@@ -32,7 +33,4 @@ public class AuthService implements UserDetailsService {
         );
     }
 
-    public UserProfileDto registerUser(RegisterUserRequestDto registerUserRequestDto) {
-
-    }
 }

@@ -3,6 +3,7 @@ package sda.spring.basicbankingsystem.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import sda.spring.basicbankingsystem.enums.AccountStatus;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Accessors(chain = true)
 public class Account {
 
     @Id

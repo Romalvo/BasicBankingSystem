@@ -4,7 +4,7 @@ package sda.spring.basicbankingsystem.dto.request;
 import lombok.Data;
 
 @Data
-public class RegisterUserRequestDto {
+public class RegisterRequestDto {
 
     private String username;
     private String password;
