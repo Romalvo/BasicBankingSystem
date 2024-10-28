@@ -1,13 +1,12 @@
 package sda.spring.basicbankingsystem.service;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sda.spring.basicbankingsystem.dto.request.LoginRequestDto;
+
 import sda.spring.basicbankingsystem.dto.request.RegisterRequestDto;
 import sda.spring.basicbankingsystem.dto.response.UserProfileDto;
 import sda.spring.basicbankingsystem.entity.User;
@@ -23,13 +22,15 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final UserMapper userMapper;
-    private final AuthenticationManager authenticationManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, AuthenticationManager authenticationManager) {
+
+    public UserService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       UserMapper userMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
-        this.authenticationManager = authenticationManager;
+
     }
 
     public UserProfileDto registerUser(RegisterRequestDto registerUserRequestDto) {
@@ -48,7 +49,7 @@ public class UserService {
         if(authentication.isAuthenticated()){
             String username = authentication.getName();
             User user = userRepository.findByUsername(username) //Implement retrieval logic
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             return UserMapper.toUserProfile(user);
         }
         return null;
