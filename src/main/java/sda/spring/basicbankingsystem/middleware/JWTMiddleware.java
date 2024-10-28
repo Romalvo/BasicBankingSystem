@@ -67,7 +67,7 @@ public class JWTMiddleware extends OncePerRequestFilter {
                 logger.warning("JWT token validation failed");
             }
         }
-        chain.doFilter(request, response);
+        chain.doFilter(request, response); // Continue the filter chain
     }
 
 }
