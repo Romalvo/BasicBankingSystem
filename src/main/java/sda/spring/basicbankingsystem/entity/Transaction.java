@@ -4,6 +4,7 @@ package sda.spring.basicbankingsystem.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import sda.spring.basicbankingsystem.enums.TransactionsStatus;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@Accessors(chain = true)
 public class Transaction {
 
     @Id
