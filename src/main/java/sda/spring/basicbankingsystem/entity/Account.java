@@ -3,6 +3,7 @@ package sda.spring.basicbankingsystem.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import sda.spring.basicbankingsystem.enums.AccountStatus;
 
@@ -14,18 +15,17 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
+@ToString
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private String iban;
 
     @Enumerated(EnumType.STRING)
     private AccountStatus status = AccountStatus.OPEN;
-
 
     @ManyToOne
     @JoinColumn(name= "user_id")
