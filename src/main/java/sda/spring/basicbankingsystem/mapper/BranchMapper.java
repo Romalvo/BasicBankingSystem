@@ -9,11 +9,11 @@ import sda.spring.basicbankingsystem.entity.Branch;
 @Component
 public class BranchMapper {
 
-    public Branch fromCreateBranchRequestToEntity(CreateBranchRequestDto createdBranchRequestDto) {
+    public Branch fromCreateBranchRequestToEntity(CreateBranchRequestDto createBranchRequestDto) {
         return new Branch()
-                .setName(createdBranchRequestDto.getName())
-                .setCountry(createdBranchRequestDto.getCountry())
-                .setTimezone(createdBranchRequestDto.getTimezone());
+                .setName(createBranchRequestDto.getName())
+                .setCountry(createBranchRequestDto.getCountry())
+                .setTimezone(createBranchRequestDto.getTimezone());
     }
 
     public CreateBranchResponseDto fromEntityToCreateBranchResponseDto(Branch branch) {
@@ -22,6 +22,6 @@ public class BranchMapper {
                 .setCountry(branch.getCountry())
                 .setName(branch.getName())
                 .setTimezone(branch.getTimezone())
-                .setCreated_at(branch.getCreatedAt());
+                .setCreatedAt(branch.getCreatedAt());
     }
 }
