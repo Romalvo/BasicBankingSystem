@@ -13,5 +13,5 @@ public class CreateBranchResponseDto {
     private String name;
     private String timezone;
     private String country;
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 }
