@@ -21,11 +21,12 @@ public class BranchService {
         this.branchMapper = branchMapper;
     }
 
-    public CreateBranchResponseDto createBranch(CreateBranchRequestDto createdBranchRequestDto) {
+    public CreateBranchResponseDto createBranch(CreateBranchRequestDto createBranchRequestDto) {
 
-        Branch branch = branchMapper.fromCreateBranchRequestToEntity(createdBranchRequestDto);
+        Branch branch = branchMapper.fromCreateBranchRequestToEntity(createBranchRequestDto);
         branch.setCreatedAt(LocalDateTime.now());
         branch = branchRepository.save(branch);
+
         return branchMapper.fromEntityToCreateBranchResponseDto(branch);
     }
 }
