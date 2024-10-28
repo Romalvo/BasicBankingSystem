@@ -23,17 +23,13 @@ public class AuthController {
 
     private final UserService userService;
 
-    private final PasswordEncoder passwordEncoder;
-
     private final JwtUtil jwtUtil;
 
     public AuthController (AuthenticationManager authenticationManager,
                            UserService userService,
-                           PasswordEncoder passwordEncoder,
                            JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
 
@@ -64,9 +60,7 @@ public class AuthController {
     // Get user profile (secured endpoint)
 
     @GetMapping("/profile")
-    public ResponseEntity<UserProfileDto> getProfile() throws AccessDeniedException {
-
-
+    public ResponseEntity<UserProfileDto> getProfile() {
         return ResponseEntity.ok(userService.getLoggedInUserProfile());
 
     }
