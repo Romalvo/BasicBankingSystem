@@ -2,10 +2,8 @@ package sda.spring.basicbankingsystem.controller;
 
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import sda.spring.basicbankingsystem.dto.request.LoginRequestDto;
 import sda.spring.basicbankingsystem.dto.request.RegisterRequestDto;
