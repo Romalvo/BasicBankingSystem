@@ -2,13 +2,9 @@ package sda.spring.basicbankingsystem.mapper;
 
 
 import org.springframework.stereotype.Component;
-import sda.spring.basicbankingsystem.dto.request.OpenAccountDto;
 import sda.spring.basicbankingsystem.dto.response.OpenAccountResponseDto;
 import sda.spring.basicbankingsystem.entity.Account;
-import sda.spring.basicbankingsystem.entity.User;
-import sda.spring.basicbankingsystem.enums.AccountStatus;
 
-import java.math.BigDecimal;
 
 @Component
 public class AccountMapper {
@@ -21,11 +17,11 @@ public class AccountMapper {
         this.branchMapper = branchMapper;
     }
 
-    public Account fromOpenAccountRequestToEntity(OpenAccountDto openAccountDto) {
-        return new Account()
-                .setBalance(BigDecimal.ZERO)
-                .setStatus(AccountStatus.OPEN);
-    }
+//    public Account fromOpenAccountRequestToEntity(OpenAccountDto openAccountDto) {
+//        return new Account()
+//                .setBalance(BigDecimal.ZERO)
+//                .setStatus(AccountStatus.OPEN);
+//    }
 
     public OpenAccountResponseDto fromEntityToOpenAccountResponseDto(Account account) {
         return new OpenAccountResponseDto()
